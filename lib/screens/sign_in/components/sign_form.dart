@@ -2,6 +2,7 @@ import 'package:e_commerce_app/components/custom_suffix_icon.dart';
 import 'package:e_commerce_app/components/default_button.dart';
 import 'package:e_commerce_app/components/form_error.dart';
 import 'package:e_commerce_app/screens/forgot_password/forgot_password_screen.dart';
+import 'package:e_commerce_app/screens/login_success/login_success_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -54,6 +55,8 @@ class _SignFormState extends State<SignForm> {
                 press: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
+                    // En caso de logueo exitoso pasar al login_success_screen
+                    Navigator.pushNamed(context, LoginSucessScreen.routeName);
                   }
                 }),
           ],
@@ -69,10 +72,12 @@ class _SignFormState extends State<SignForm> {
           setState(() {
             errors.remove(kPassNullError);
           });
+          return "";
         } else if (value.length >= 8 && errors.contains(kShortPassError)) {
           setState(() {
             errors.remove(kShortPassError);
           });
+          return "";
         }
         return null;
       },
@@ -81,12 +86,14 @@ class _SignFormState extends State<SignForm> {
           setState(() {
             errors.add(kPassNullError);
           });
+          return "";
         } else if (value.isNotEmpty &&
             value.length < 8 &&
             !errors.contains(kShortPassError)) {
           setState(() {
             errors.add(kShortPassError);
           });
+          return "";
         }
         return null;
       },

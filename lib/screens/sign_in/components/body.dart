@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/components/no_account_text.dart';
 import 'package:e_commerce_app/components/social_card.dart';
-import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce_app/size_config.dart';
 import 'package:flutter/material.dart';
