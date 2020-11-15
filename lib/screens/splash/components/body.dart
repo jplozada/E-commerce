@@ -45,7 +45,6 @@ class _BodyState extends State<Body> {
                         itemBuilder: (context, index) => SplashContent(
                             image: splashData[index]["image"],
                             text: splashData[index]["text"]))),
-                Spacer(),
                 Expanded(
                     flex: 2,
                     child: Padding(

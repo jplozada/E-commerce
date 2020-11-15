@@ -3,6 +3,7 @@ import 'package:e_commerce_app/size_config.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
+  static String routeName = "/splash";
   @override
   Widget build(BuildContext context) {
     // Inicializar size_config
