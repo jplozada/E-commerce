@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/components/no_account_text.dart';
 import 'package:e_commerce_app/components/social_card.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/screens/sign_in/components/sign_form.dart';
@@ -49,18 +50,7 @@ class Body extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: getProportionateScreenHeight(20)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Don't have an account? ",
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(16))),
-                        Text("Sign up",
-                            style: TextStyle(
-                                fontSize: getProportionateScreenWidth(16),
-                                color: kPrimaryColor))
-                      ],
-                    )
+                    NoAccountText()
                   ],
                 )))));
   }

@@ -40,7 +40,7 @@ class _SignFormState extends State<SignForm> {
                 Text("Remember me"),
                 Spacer(),
                 GestureDetector(
-                  onTap: () => Navigator.popAndPushNamed(
+                  onTap: () => Navigator.pushNamed(
                       context, ForgotPasswordScreen.routeName),
                   child: Text("Forgot Password",
                       style: TextStyle(decoration: TextDecoration.underline)),
