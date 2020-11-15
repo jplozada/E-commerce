@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/components/default_button.dart';
 import 'package:e_commerce_app/components/form_error.dart';
+import 'package:e_commerce_app/components/social_card.dart';
 import 'package:e_commerce_app/constants.dart';
+import 'package:e_commerce_app/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,8 +17,10 @@ class Body extends StatelessWidget {
             child: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: getProportionateScreenWidth(20)),
-                child: Column(
+                child: SingleChildScrollView(
+                    child: Column(
                   children: [
+                    SizedBox(height: SizeConfig.screenHeight * 0.04),
                     Text(
                       "Welcome Back",
                       style: TextStyle(
@@ -28,118 +32,40 @@ class Body extends StatelessWidget {
                       "Sign in with your email and password  \nor continue with social media",
                       textAlign: TextAlign.center,
                     ),
-                    SignForm()
+                    SizedBox(height: SizeConfig.screenHeight * 0.08),
+                    SignForm(),
+                    SizedBox(height: SizeConfig.screenHeight * 0.08),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SocialCard(
+                          icon: "assets/icons/google-icon.svg",
+                          press: () {},
+                        ),
+                        SocialCard(
+                          icon: "assets/icons/facebook-2.svg",
+                          press: () {},
+                        ),
+                        SocialCard(
+                          icon: "assets/icons/twitter.svg",
+                          press: () {},
+                        )
+                      ],
+                    ),
+                    SizedBox(height: getProportionateScreenHeight(20)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account? ",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16))),
+                        Text("Sign up",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16),
+                                color: kPrimaryColor))
+                      ],
+                    )
                   ],
-                ))));
-  }
-}
-
-class SignForm extends StatefulWidget {
-  @override
-  _SignFormState createState() => _SignFormState();
-}
-
-class _SignFormState extends State<SignForm> {
-  final _formKey = GlobalKey<FormState>();
-  String email;
-  String password;
-  final List<String> errors = [];
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            buildEmailFormField(),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            buildPasswordFormField(),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            FormError(errors: errors),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            DefaultButton(
-                text: "Continue",
-                press: () {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                  }
-                }),
-          ],
-        ));
-  }
-
-    TextFormField buildPasswordFormField() {
-    return TextFormField(
-      obscureText: true,
-      onSaved: (newValue) => password = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kPassNullError)) {
-          setState(() {
-            errors.remove(kPassNullError);
-          });
-        } else if (value.length >= 8 &&
-            errors.contains(kShortPassError)) {
-          setState(() {
-            errors.remove(kShortPassError);
-          });
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value.isEmpty && !errors.contains(kPassNullError)) {
-          setState(() {
-            errors.add(kPassNullError);
-          });
-        } else if (value.isNotEmpty && value.length < 8 &&
-            !errors.contains(kShortPassError)) {
-          setState(() {
-            errors.add(kShortPassError);
-          });
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-          labelText: "Password",
-          hintText: "Enter your password",
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Lock.svg")),
-    );
-  }
-
-  TextFormField buildEmailFormField() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-          setState(() {
-            errors.remove(kEmailNullError);
-          });
-        } else if (emailValidatorRegExp.hasMatch(value) &&
-            errors.contains(kInvalidEmailError)) {
-          setState(() {
-            errors.remove(kInvalidEmailError);
-          });
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value.isEmpty && !errors.contains(kEmailNullError)) {
-          setState(() {
-            errors.add(kEmailNullError);
-          });
-        } else if (value.isNotEmpty && !emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
-          setState(() {
-            errors.add(kInvalidEmailError);
-          });
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-          labelText: "Email",
-          hintText: "Enter your email",
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Mail.svg")),
-    );
+                )))));
   }
 }
