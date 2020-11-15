@@ -1,12 +1,8 @@
-import 'package:e_commerce_app/components/default_button.dart';
-import 'package:e_commerce_app/components/form_error.dart';
 import 'package:e_commerce_app/components/social_card.dart';
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce_app/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../components/custom_suffix_icon.dart';
 
 class Body extends StatelessWidget {
   @override
